@@ -17,7 +17,7 @@ void LoadCalibration();
 std::string _calibrationPath;
 int _torqueMap[8][8];
 int _maxRpm;
-AnalogSensor _tps(float, float);
+AnalogSensor _tps(float, float); //@TODO work out how to get min and max out of file and into floats
 DigitalSensor _ckp();
 };
 
