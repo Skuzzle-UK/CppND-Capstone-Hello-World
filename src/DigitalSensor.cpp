@@ -4,7 +4,7 @@ DigitalSensor::DigitalSensor(){
     _currentValue = LOW;
 }
 
-DigitalSensor::digitalBool DigitalSensor::Value(){
+DigitalSensor::digitalBoolean DigitalSensor::Value(){
     return _currentValue;
 }
 

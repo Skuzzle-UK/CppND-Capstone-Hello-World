@@ -1,26 +1,24 @@
 #ifndef DIGITALSENSOR_H_
 #define DIGITALSENSOR_H_
 
-#include "Input.h"
-
-class DigitalSensor : public Input
+class DigitalSensor
 {
 public:
 //Constructor - Destructor
 DigitalSensor();
 ~DigitalSensor();
 
-enum digitalBool {LOW, HIGH}; //value of high or low;
+enum digitalBoolean {LOW, HIGH}; //value of high or low;
 
 //Getters
-digitalBool Value(); //method to get current value
+digitalBoolean Value(); //method to get current value
 
 //Setters
 void GoHigh();
 void GoLow();
 
 private:
-digitalBool _currentValue;
+digitalBoolean _currentValue;
 
 };
 

@@ -1,14 +1,14 @@
 #include "AnalogSensor.h"
-#include "Input.h"
 
 AnalogSensor::AnalogSensor(float min, float max)
 {
     _min = min;
     _max = max;
-    _voltage = ((max - min) / 2) + min; // set start voltage to middle of range
+    _voltage = min; // set start voltage to minimum
 }
 
-float AnalogSensor::Voltage(){
+float AnalogSensor::Voltage()
+{
     return _voltage;
 }
 

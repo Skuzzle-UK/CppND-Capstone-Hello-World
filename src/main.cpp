@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
+#include "Calibration.h"
 
 int main() {
-    std::cout << "Hello World!" << "\n";
-    return 0;
+    std::string calibrationPath = "./datafiles/calibration1.clb";
+    Calibration motor(calibrationPath);
 }
