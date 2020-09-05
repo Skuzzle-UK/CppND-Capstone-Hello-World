@@ -1,26 +1,39 @@
 #include "AnalogSensor.h"
+#include <regex>
 
 AnalogSensor::AnalogSensor(float min, float max)
 {
-    _min = min;
-    _max = max;
-    _voltage = min; // set start voltage to minimum
+    AnalogSensor::Update(min, max);
 }
 
-float AnalogSensor::Voltage()
+float AnalogSensor::Value(float voltage)
 {
-    return _voltage;
+    float value = 0;
+    float inc;
+    inc = (_max - _min) / 100;
+    value = (voltage - _min) / inc;
+    return value;
 }
 
-void AnalogSensor::Update(float &newVoltage){
-    if (Sanity){
-        _voltage = newVoltage;
-    }
-}
-
-bool AnalogSensor::Sanity(float &newVoltage){
-    if (newVoltage >= _min || newVoltage <= _max){
+bool AnalogSensor::Sanity(float min, float max){
+    if (min < max)
+    {
         return true;
     }
-    else return false;
+    else
+    {
+        return false;
+    }
+}
+
+void AnalogSensor::Update(float min, float max)
+{
+    if (Sanity(min, max))
+    {
+        _min = min;
+        _max = max;
+    }
+    else{
+        throw std::runtime_error("Minimum value must be less than maximum");
+    }
 }

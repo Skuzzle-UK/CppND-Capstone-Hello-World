@@ -1,4 +1,5 @@
 #include <fstream>
+#include <sstream>
 #include <regex>
 #include "Calibration.h"
 
@@ -9,10 +10,6 @@ Calibration::Calibration(std::string calibrationPath)
 }
 
 void Calibration::LoadCalibration(){ //Read calibration data from file
-    bool torqueinput = false;
-    float f1, f2;
-    int i1, i2;
-    int v[8];
     std::string line;
     std::string key;
     std::ifstream calibration(_calibrationPath);
@@ -20,18 +17,21 @@ void Calibration::LoadCalibration(){ //Read calibration data from file
     if (calibration.is_open()) {
         
         //Load TPS
+        float f1, f2;
         std::getline(calibration, line);
         std::istringstream linestream(line);
         linestream >> key >> f1 >> f2;
         _tps(f1, f2);
 
         //Load number of trigger teeth per revolution
+        int i1;
         std::getline(calibration, line);
         std::istringstream linestream(line);
         linestream >> key >> i1;
         _teeth = i1;
 
         //Load torque map
+        int v[8];
         for (int y = 0; y < 8; y++){
             std::getline(calibration, line);
             std::istringstream linestream(line);

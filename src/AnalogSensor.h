@@ -9,15 +9,14 @@ AnalogSensor(float min, float max);
 ~AnalogSensor();
 
 //Getters
-float Voltage(); //method to get current value
+float Value(float voltage); //method to get current value as a percentage
 
 //Setters
-void Update(float &newVoltage); //method to change value
+void Update(float min, float max); //method to change value
 
 private:
-bool Sanity(float &newVoltage); //method to check for value sanity called by Update
+bool Sanity(float min, float max); //method to check for value sanity called by Update
 
-float _voltage; // current value between min - max volts sanity checked through sanity method
 float _min; //minimum voltage based on user calibration data
 float _max; //maximum voltage based on user calibration data
 };
