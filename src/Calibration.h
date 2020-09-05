@@ -17,7 +17,8 @@ void LoadCalibration();
 std::string _calibrationPath;
 int _torqueMap[8][8];
 int _maxRpm;
-AnalogSensor _tps(float, float); //@TODO work out how to get min and max out of file and into floats
+int _teeth; //number of triggers per revolution of motor
+AnalogSensor _tps(float, float);
 DigitalSensor _ckp();
 };
 
