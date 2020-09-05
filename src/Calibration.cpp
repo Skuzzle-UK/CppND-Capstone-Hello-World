@@ -5,6 +5,7 @@
 Calibration::Calibration(std::string calibrationPath)
 {
     _calibrationPath = calibrationPath;
+    LoadCalibration();
 }
 
 void Calibration::LoadCalibration(){ //Read calibration data from file
