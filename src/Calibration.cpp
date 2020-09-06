@@ -15,15 +15,17 @@ Calibration::~Calibration()
     //Insert decontruction code here
 }
 
-int Calibration::GetRpm(int &triggersPerSecond){ //Probably wont use this in final commit
+int Calibration::GetRpm(int &triggersPerSecond)
+{
     int currentRpm = 0;
-    currentRpm = (triggersPerSecond * 60 * 60) / _teeth;
+    currentRpm = (triggersPerSecond * 60) / _teeth;
     return currentRpm;
 }
 
 float Calibration::GetTps(float &voltage)
 {
     float tps = _tps.Value(voltage);
+    return tps;
 }
 
 void Calibration::LoadCalibration(){ //Read calibration data from file

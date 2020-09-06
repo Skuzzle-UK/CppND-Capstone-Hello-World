@@ -2,6 +2,7 @@
 #define SIMULATION_H_
 #include <memory>
 #include <vector>
+#include <mutex>
 #include "Calibration.h"
 
 class Simulation
@@ -21,6 +22,7 @@ std::vector<int> _triggersPerSecond;
 std::vector<float> _tpsVoltage;
 std::vector<float> _distance;
 std::vector<int> _torqueRequired;
+std::mutex _mutex;
 };
 
 #endif /* SIMULATION_H_ */

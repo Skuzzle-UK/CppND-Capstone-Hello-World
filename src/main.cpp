@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <filesystem>
+#include <future>
 
 
 //Lets make a sim whereby 3 or 4 calibration files are loaded in.
@@ -62,22 +63,21 @@ int main() {
         sims.emplace_back(sim);
     }
 
+    //@TODO sort out simulation running - currently just loads sims into threads
     for(int i = 0; i < sims.size(); i++)
     {
+        std::vector<std::future<float>> simthreads;
+        std::vector<float> results;
         for(int j = 0; j < motors.size(); j++)
         {
-            sims[i]->StartSimulation(motors[j]);
+            simthreads.emplace_back(std::async(&Simulation::StartSimulation, sims[i], motors[j]));
+        }
+        for(int k = 0; k < motors.size(); k++)
+        {
+            results.push_back(simthreads[k].get()); //@TODO work out how to actually deal with results
         }
     }
 
-    //@TODO write simulation class and load simulation data file(s)
-    //Start simulation as an object (maybe several simulations on seperate threads)
-    //Use rule of 5 to copy calibration data into sim as shared pointer perhaps.
-    //Have already created Calibration motor as shared_ptr so part way there but also make a vector of calibrations.
 
-    //Scrap voltage in analog sensor - Add min and max real figures i.e. 0-100%.
-    //Add method to calc and return real human readable figure i.e. previously said percentage.
-    //Dont store current value (just use sim to lookup current value from min and max calc)
-    //so that it can be used during interpolation
     return 0;
 }
