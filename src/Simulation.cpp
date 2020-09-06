@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include <regex>
 #include "Simulation.h"
 
@@ -14,25 +15,35 @@ Simulation::~Simulation()
   //Insert abny deconstruction code here  
 }
 
-void Simulation::LoadSimulation(){ //Read simulation data from file
+void Simulation::LoadSimulation(){ //Read simulation data from file into vectors
     std::string line;
     std::string key;
     std::ifstream simulationFile(_simulationPath);
     
     if (simulationFile.is_open()) {
-        //@TODO write code to add each line of sim file into various vectors for each variable as detailed in Simulation1.sim
         while(key != "#START_SIM")
         {
             std::getline(simulationFile, line);
             std::istringstream linestream(line);
             linestream >> key;
         }
+        std::cout << "Loading simulation" << _simulationPath << " ... \n";
         while (key != "#END_SIM")
         {
+            int triggersPerSecond, torqueRequired;
+            float tpsVoltage, distance;
             std::getline(simulationFile, line);
             std::istringstream linestream(line);
-            linestream >> _triggersPerSecond.emplace_back() >> _tpsVoltage.emplace_back() >> _distance.emplace_back() >> _torqueRequired.emplace_back();
+            linestream >> key >> triggersPerSecond >> tpsVoltage >> distance >> torqueRequired;
+            if (key != "#END_SIM")
+            {
+                _triggersPerSecond.emplace_back(tpsVoltage);
+                _tpsVoltage.emplace_back(tpsVoltage);
+                _distance.emplace_back(distance);
+                _torqueRequired.emplace_back(torqueRequired);
+            }
         }
+        std::cout << "Simulation " << _simulationPath << " loaded!" << "\n";
         simulationFile.close();
     }
     else {
