@@ -45,14 +45,14 @@ int main() {
     std::vector<std::string> simulationFiles = FindFilesOfType(simulationPath, simulationExt);
 
     //Create container vectors for calibrations and sims
-    std::vector<std::unique_ptr<Calibration>> motors; //Unique pointer as only using once at a time
+    std::vector<std::shared_ptr<Calibration>> motors; //Shared pointer as needs to move in and out of functions easily
     std::vector<std::shared_ptr<Simulation>> sims; //Shared pointer as sim will run for all calibrations at the same time in seperate threads
 
     //Load each calibration and sim file into memory
     for(auto itr : calibrationFiles)
     {
         std::string path = calibrationPath + "/" + itr + calibrationExt;
-        std::unique_ptr<Calibration> motor(new Calibration(path));
+        std::shared_ptr<Calibration> motor(new Calibration(path));
         motors.emplace_back(std::move(motor));
     }
     for(auto itr : simulationFiles)
@@ -63,7 +63,7 @@ int main() {
     }
 
     //*** REMOVE WHEN HAPPY
-    for(int i = 0; i < 2; i++) //Test motors has successfully loaded with calibrations
+    for(int i = 0; i < motors.size(); i++) //Test motors has successfully loaded with calibrations
     {
         std::cout << motors[i]->MaxRpm() << "\n"; //Display max RPM of each motor (could have chosen any data for test)
     }

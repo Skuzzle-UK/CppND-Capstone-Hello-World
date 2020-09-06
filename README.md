@@ -22,6 +22,16 @@ It then drives this electric motor through a simple simulated course and reports
 
 It does this not once, but with several different motor calibrations all being driven through several different simulated scenarios to find the best motor calibration overall under several usage conditions.
 
+## Assumptions
+* EV motor can run at varying rpms.
+* Drive ratio of 1km every 1000rpm of motor.
+* If max rpm is reached vehicle will no longer speed up.
+* If zero rpm is reached during testing then test fails.
+* If test end is reached then test considered a success.
+* Torque effort required to maintain constant velocity simulated various inclines that vehicle may climb.
+* Torque output beyond required effort creates acceleration and below required effort deceleration.
+* Speed of zero kph confirmed by zero rpm results in test failure
+
 ## Order of execution
 1. Vector of motors is created and loaded with calibration files of type .map found within folder ./datafiles.
 2. Vector of simulations is created and loaded with simulation files of type .sim found within folder ./datafiles.

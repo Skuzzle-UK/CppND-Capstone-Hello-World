@@ -10,6 +10,7 @@ class Calibration
 public:
     //Constructor / deconstructor
     Calibration(std::string);
+    ~Calibration();
 
     //getters
     int MaxRpm();
