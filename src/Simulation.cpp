@@ -54,9 +54,9 @@ void Simulation::LoadSimulation(){ //Read simulation data from file into vectors
 float Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
 {
     float timeToComplete = 0;
-    //@TODO write code that iterates through each line of code
-    //Drive vehicle through sim base on each line of code
+    //@TODO write code that iterates through each item of all data vectors
+    //Drive vehicle through sim based on each item of data vectors
     //Check vehicle reaches end of course or rpm zero so fails
-    //Record to between lines to create total time take for sim
+    //Record time between lines to create total time take for sim
     return timeToComplete;
 }
