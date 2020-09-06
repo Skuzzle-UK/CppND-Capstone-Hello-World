@@ -8,18 +8,21 @@
 class Calibration
 {
 public:
-Calibration(std::string);
-~Calibration();
+    //Constructor / deconstructor
+    Calibration(std::string);
+
+    //getters
+    int MaxRpm();
 
 private:
-void LoadCalibration();
-
-std::string _calibrationPath;
-int _torqueMap[8][8];
-int _maxRpm;
-int _teeth; //number of triggers per revolution of motor
-AnalogSensor _tps(float, float);
-DigitalSensor _ckp();
+    
+    void LoadCalibration();
+    std::string _calibrationPath;
+    int _torqueMap[8][8];
+    int _maxRpm;
+    int _teeth; //number of triggers per revolution of motor
+    AnalogSensor _tps(float, float);
+    DigitalSensor _ckp();
 };
 
 #endif /* CALIBRATION_H_ */

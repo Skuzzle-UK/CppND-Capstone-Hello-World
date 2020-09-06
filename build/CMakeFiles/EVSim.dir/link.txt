@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/EVSim.dir/src/main.cpp.o  -o EVSim 
+/usr/bin/c++  -std=c++17 -pthread   CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o CMakeFiles/EVSim.dir/src/Calibration.cpp.o CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o CMakeFiles/EVSim.dir/src/Simulation.cpp.o CMakeFiles/EVSim.dir/src/main.cpp.o  -o EVSim 

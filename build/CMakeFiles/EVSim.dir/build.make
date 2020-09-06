@@ -57,9 +57,61 @@ include CMakeFiles/EVSim.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/EVSim.dir/flags.make
 
+CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o: CMakeFiles/EVSim.dir/flags.make
+CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o: ../src/AnalogSensor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o -c /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/AnalogSensor.cpp
+
+CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/AnalogSensor.cpp > CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.i
+
+CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/AnalogSensor.cpp -o CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.s
+
+CMakeFiles/EVSim.dir/src/Calibration.cpp.o: CMakeFiles/EVSim.dir/flags.make
+CMakeFiles/EVSim.dir/src/Calibration.cpp.o: ../src/Calibration.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EVSim.dir/src/Calibration.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EVSim.dir/src/Calibration.cpp.o -c /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.cpp
+
+CMakeFiles/EVSim.dir/src/Calibration.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EVSim.dir/src/Calibration.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.cpp > CMakeFiles/EVSim.dir/src/Calibration.cpp.i
+
+CMakeFiles/EVSim.dir/src/Calibration.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EVSim.dir/src/Calibration.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.cpp -o CMakeFiles/EVSim.dir/src/Calibration.cpp.s
+
+CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o: CMakeFiles/EVSim.dir/flags.make
+CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o: ../src/DigitalSensor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o -c /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/DigitalSensor.cpp
+
+CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/DigitalSensor.cpp > CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.i
+
+CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/DigitalSensor.cpp -o CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.s
+
+CMakeFiles/EVSim.dir/src/Simulation.cpp.o: CMakeFiles/EVSim.dir/flags.make
+CMakeFiles/EVSim.dir/src/Simulation.cpp.o: ../src/Simulation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EVSim.dir/src/Simulation.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EVSim.dir/src/Simulation.cpp.o -c /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.cpp
+
+CMakeFiles/EVSim.dir/src/Simulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EVSim.dir/src/Simulation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.cpp > CMakeFiles/EVSim.dir/src/Simulation.cpp.i
+
+CMakeFiles/EVSim.dir/src/Simulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EVSim.dir/src/Simulation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.cpp -o CMakeFiles/EVSim.dir/src/Simulation.cpp.s
+
 CMakeFiles/EVSim.dir/src/main.cpp.o: CMakeFiles/EVSim.dir/flags.make
 CMakeFiles/EVSim.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EVSim.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EVSim.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EVSim.dir/src/main.cpp.o -c /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/main.cpp
 
 CMakeFiles/EVSim.dir/src/main.cpp.i: cmake_force
@@ -72,15 +124,23 @@ CMakeFiles/EVSim.dir/src/main.cpp.s: cmake_force
 
 # Object files for target EVSim
 EVSim_OBJECTS = \
+"CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o" \
+"CMakeFiles/EVSim.dir/src/Calibration.cpp.o" \
+"CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o" \
+"CMakeFiles/EVSim.dir/src/Simulation.cpp.o" \
 "CMakeFiles/EVSim.dir/src/main.cpp.o"
 
 # External object files for target EVSim
 EVSim_EXTERNAL_OBJECTS =
 
+EVSim: CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o
+EVSim: CMakeFiles/EVSim.dir/src/Calibration.cpp.o
+EVSim: CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o
+EVSim: CMakeFiles/EVSim.dir/src/Simulation.cpp.o
 EVSim: CMakeFiles/EVSim.dir/src/main.cpp.o
 EVSim: CMakeFiles/EVSim.dir/build.make
 EVSim: CMakeFiles/EVSim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable EVSim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable EVSim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EVSim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

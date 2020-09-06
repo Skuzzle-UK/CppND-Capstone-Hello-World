@@ -8,6 +8,18 @@
 
 /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/AnalogSensor.h
 
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.cpp
+fstream
+-
+sstream
+-
+regex
+-
+string
+-
+Calibration.h
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.h
+
 /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.h
 string
 -
@@ -18,7 +30,23 @@ DigitalSensor.h
 
 /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/DigitalSensor.h
 
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.cpp
+fstream
+-
+sstream
+-
+regex
+-
+Simulation.h
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.h
+
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.h
+
 /mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/main.cpp
+Calibration.h
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.h
+Simulation.h
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Simulation.h
 iostream
 -
 string
@@ -31,6 +59,4 @@ fstream
 -
 filesystem
 -
-Calibration.h
-/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/src/Calibration.h
 

@@ -123,6 +123,114 @@ EVSim/fast:
 	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/build
 .PHONY : EVSim/fast
 
+src/AnalogSensor.o: src/AnalogSensor.cpp.o
+
+.PHONY : src/AnalogSensor.o
+
+# target to build an object file
+src/AnalogSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.o
+.PHONY : src/AnalogSensor.cpp.o
+
+src/AnalogSensor.i: src/AnalogSensor.cpp.i
+
+.PHONY : src/AnalogSensor.i
+
+# target to preprocess a source file
+src/AnalogSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.i
+.PHONY : src/AnalogSensor.cpp.i
+
+src/AnalogSensor.s: src/AnalogSensor.cpp.s
+
+.PHONY : src/AnalogSensor.s
+
+# target to generate assembly for a file
+src/AnalogSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/AnalogSensor.cpp.s
+.PHONY : src/AnalogSensor.cpp.s
+
+src/Calibration.o: src/Calibration.cpp.o
+
+.PHONY : src/Calibration.o
+
+# target to build an object file
+src/Calibration.cpp.o:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Calibration.cpp.o
+.PHONY : src/Calibration.cpp.o
+
+src/Calibration.i: src/Calibration.cpp.i
+
+.PHONY : src/Calibration.i
+
+# target to preprocess a source file
+src/Calibration.cpp.i:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Calibration.cpp.i
+.PHONY : src/Calibration.cpp.i
+
+src/Calibration.s: src/Calibration.cpp.s
+
+.PHONY : src/Calibration.s
+
+# target to generate assembly for a file
+src/Calibration.cpp.s:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Calibration.cpp.s
+.PHONY : src/Calibration.cpp.s
+
+src/DigitalSensor.o: src/DigitalSensor.cpp.o
+
+.PHONY : src/DigitalSensor.o
+
+# target to build an object file
+src/DigitalSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.o
+.PHONY : src/DigitalSensor.cpp.o
+
+src/DigitalSensor.i: src/DigitalSensor.cpp.i
+
+.PHONY : src/DigitalSensor.i
+
+# target to preprocess a source file
+src/DigitalSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.i
+.PHONY : src/DigitalSensor.cpp.i
+
+src/DigitalSensor.s: src/DigitalSensor.cpp.s
+
+.PHONY : src/DigitalSensor.s
+
+# target to generate assembly for a file
+src/DigitalSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/DigitalSensor.cpp.s
+.PHONY : src/DigitalSensor.cpp.s
+
+src/Simulation.o: src/Simulation.cpp.o
+
+.PHONY : src/Simulation.o
+
+# target to build an object file
+src/Simulation.cpp.o:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Simulation.cpp.o
+.PHONY : src/Simulation.cpp.o
+
+src/Simulation.i: src/Simulation.cpp.i
+
+.PHONY : src/Simulation.i
+
+# target to preprocess a source file
+src/Simulation.cpp.i:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Simulation.cpp.i
+.PHONY : src/Simulation.cpp.i
+
+src/Simulation.s: src/Simulation.cpp.s
+
+.PHONY : src/Simulation.s
+
+# target to generate assembly for a file
+src/Simulation.cpp.s:
+	$(MAKE) -f CMakeFiles/EVSim.dir/build.make CMakeFiles/EVSim.dir/src/Simulation.cpp.s
+.PHONY : src/Simulation.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -159,6 +267,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... EVSim"
+	@echo "... src/AnalogSensor.o"
+	@echo "... src/AnalogSensor.i"
+	@echo "... src/AnalogSensor.s"
+	@echo "... src/Calibration.o"
+	@echo "... src/Calibration.i"
+	@echo "... src/Calibration.s"
+	@echo "... src/DigitalSensor.o"
+	@echo "... src/DigitalSensor.i"
+	@echo "... src/DigitalSensor.s"
+	@echo "... src/Simulation.o"
+	@echo "... src/Simulation.i"
+	@echo "... src/Simulation.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -145,7 +145,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=EVSim
+CMAKE_PROJECT_NAME:STATIC=OSM_A_star_search
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -214,6 +214,12 @@ EVSim_BINARY_DIR:STATIC=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build
 
 //Value Computed by CMake
 EVSim_SOURCE_DIR:STATIC=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation
+
+//Value Computed by CMake
+OSM_A_star_search_BINARY_DIR:STATIC=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build
+
+//Value Computed by CMake
+OSM_A_star_search_SOURCE_DIR:STATIC=/mnt/hgfs/SharedDocs/GitHub/EV-Simulation
 
 
 ########################

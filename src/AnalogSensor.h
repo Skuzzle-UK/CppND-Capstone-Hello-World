@@ -6,7 +6,6 @@ class AnalogSensor
 public:
 //Constructor - Destructor
 AnalogSensor(float min, float max);
-~AnalogSensor();
 
 //Getters
 float Value(float voltage); //method to get current value as a percentage
