@@ -3,7 +3,6 @@
 
 #include <string>
 #include "AnalogSensor.h"
-#include "DigitalSensor.h"
 
 class Calibration
 {
@@ -13,7 +12,8 @@ public:
     ~Calibration();
 
     //getters
-    int MaxRpm();
+    int GetRpm(int &);
+    float GetTps(float &);
 
 private:
     
@@ -22,8 +22,7 @@ private:
     int _torqueMap[8][8];
     int _maxRpm;
     int _teeth; //number of triggers per revolution of motor
-    AnalogSensor _tps(float, float);
-    DigitalSensor _ckp();
+    AnalogSensor _tps;
 };
 
 #endif /* CALIBRATION_H_ */

@@ -10,9 +10,11 @@ public:
 Simulation(std::string);
 ~Simulation(); //must return calibrations back to main.cpp unless does this automatically
 
+float StartSimulation(std::shared_ptr<Calibration>);
+
 private:
 void LoadSimulation();
-float StartSimulation(std::shared_ptr<Calibration>);
+
 
 std::string _simulationPath;
 std::vector<int> _triggersPerSecond;

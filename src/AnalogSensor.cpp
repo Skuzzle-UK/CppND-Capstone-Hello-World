@@ -1,9 +1,9 @@
 #include "AnalogSensor.h"
 #include <regex>
 
-AnalogSensor::AnalogSensor(float min, float max)
+AnalogSensor::AnalogSensor()
 {
-    AnalogSensor::Update(min, max);
+    AnalogSensor::Update(0.0, 5.0);
 }
 
 float AnalogSensor::Value(float voltage)

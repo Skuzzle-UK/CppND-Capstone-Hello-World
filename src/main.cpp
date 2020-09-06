@@ -53,7 +53,7 @@ int main() {
     {
         std::string path = calibrationPath + "/" + itr + calibrationExt;
         std::shared_ptr<Calibration> motor(new Calibration(path));
-        motors.emplace_back(std::move(motor));
+        motors.emplace_back(motor);
     }
     for(auto itr : simulationFiles)
     {
@@ -62,13 +62,13 @@ int main() {
         sims.emplace_back(sim);
     }
 
-    //*** REMOVE WHEN HAPPY
-    for(int i = 0; i < motors.size(); i++) //Test motors has successfully loaded with calibrations
+    for(int i = 0; i < sims.size(); i++)
     {
-        std::cout << motors[i]->MaxRpm() << "\n"; //Display max RPM of each motor (could have chosen any data for test)
+        for(int j = 0; j < motors.size(); j++)
+        {
+            sims[i]->StartSimulation(motors[j]);
+        }
     }
-    // *** End here
-
 
     //@TODO write simulation class and load simulation data file(s)
     //Start simulation as an object (maybe several simulations on seperate threads)

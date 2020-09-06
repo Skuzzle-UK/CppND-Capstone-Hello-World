@@ -15,8 +15,15 @@ Calibration::~Calibration()
     //Insert decontruction code here
 }
 
-int Calibration::MaxRpm(){ //Probably wont use this in final commit
-    return _maxRpm;
+int Calibration::GetRpm(int &triggersPerSecond){ //Probably wont use this in final commit
+    int currentRpm = 0;
+    currentRpm = (triggersPerSecond * 60 * 60) / _teeth;
+    return currentRpm;
+}
+
+float Calibration::GetTps(float &voltage)
+{
+    float tps = _tps.Value(voltage);
 }
 
 void Calibration::LoadCalibration(){ //Read calibration data from file
@@ -31,7 +38,7 @@ void Calibration::LoadCalibration(){ //Read calibration data from file
         std::getline(calibrationFile, line);
         std::istringstream linestream(line);
         linestream >> key >> f1 >> f2;
-        AnalogSensor _tps(f1, f2);
+        _tps.Update(f1, f2);
 
         //Load number of trigger teeth per revolution
         int i1;
