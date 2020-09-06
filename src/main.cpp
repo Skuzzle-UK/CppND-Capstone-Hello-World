@@ -2,6 +2,8 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <fstream>
+#include <filesystem>
 #include "Calibration.h"
 
 //Lets make a sim whereby 3 or 4 calibration files are loaded in.
@@ -15,10 +17,41 @@
 //loop
 //Finally pick overall best calibration
 
-int main() {
-    std::string calibrationPath = "./datafiles/Calibration.map";
-    std::unique_ptr<Calibration> motor(new Calibration(calibrationPath));
+std::vector<std::string> FindFilesOfType(std::string &path, std::string &ext)
+{
+    std::vector<std::string> files;
+    for (auto &p : std::filesystem::recursive_directory_iterator(path))
+    {
+        if (p.path().extension() == ext)
+        {
+            files.emplace_back(p.path().stem().string());
+        }
+    }
+    return files;
+}
 
+int main() {
+    std::string calibrationPath = "./datafiles/";
+    std::string calibrationExt = ".map";
+    std::string simulationPath = "./datafiles/";
+    std::string simulationExt = ".sim";
+    std::vector<std::string> calibrationFiles = FindFilesOfType(calibrationPath, calibrationExt);
+    std::vector<std::string> simulationFiles = FindFilesOfType(simulationPath, simulationExt);
+
+    //*****@TODO remove later or turn into creation of calibration and sim objects - currently using for testing FindFileOfType
+    for(auto itr : calibrationFiles)
+    {
+        std::cout << itr << " ";
+    }
+
+    for(auto itr : simulationFiles)
+    {
+        std::cout << itr << " ";
+    }
+    //*****@END Removal here
+
+    //std::unique_ptr<Calibration> motor(new Calibration(calibrationPath));
+    
     //@TODO write simulation class and load simulation data file(s)
     //Start simulation as an object (maybe several simulations on seperate threads)
     //Use rule of 5 to copy calibration data into sim as shared pointer perhaps.
@@ -28,5 +61,5 @@ int main() {
     //Add method to calc and return real human readable figure i.e. previously said percentage.
     //Dont store current value (just use sim to lookup current value from min and max calc)
     //so that it can be used during interpolation
-
+    return 0;
 }
