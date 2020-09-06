@@ -70,5 +70,5 @@ float Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
         std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " tps : " << tps << "\n";
         _mutex.unlock();
     }
-    return timeToComplete;
+    return timeToComplete; //@TODO - work out how to calc timeToComplete
 }
