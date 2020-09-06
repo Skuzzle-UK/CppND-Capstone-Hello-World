@@ -50,9 +50,15 @@ It does this not once, but with several different motor calibrations all being d
 3. Compile: `cmake .. && make`
 4. Run it: `./EVSim`
 
-## Files
+## Source Files - Found within src folder
 * main.cpp - `main method. Loads calibrations and simulations. Organises results to display them to terminal`
 * AnalogSensor.cpp - `Creates analog sensor object. Can be a voltage between specified min and max. Specifically used for throttle position in this sim`
 * DigitalSensor.cpp - `Creates digital sensor object. Can be set to HIGH or LOW. Using for crank position sensor`
 * Calibration.cpp - `To build a sim motor. Calibration relies on the sensor.cpp's to create an object that resembles an electric vehicle motor with tps, ckp and "3D" torque map`
 * Simulation.cpp - `Creates a simulation environment. Loads sim data and contains methods to run simulation. Returns time vehicle would have taken to complete course`
+
+## Data Files - Found within datafiles folder
+* Pay attention to how the data files are created as they are read line by line. The `Key` of each line can be named anything, but suggest name remains the same for continuity and easy visual representation of data that follows.
+* Data in files is blank space seperated. For example TPS 0.4 4.7 is ready by the code as variables KEY >> Min >> Max.
+* If in doubt don't modify these data files as no checking is done for correct data on each line.
+* Don't introduce extra lines including blank space lines into these files.
