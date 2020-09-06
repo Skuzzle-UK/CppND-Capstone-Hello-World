@@ -17,7 +17,7 @@
 //loop
 //Finally pick overall best calibration
 
-std::vector<std::string> FindFilesOfType(std::string &path, std::string &ext)
+std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
 {
     std::vector<std::string> files;
     for (auto &p : std::filesystem::recursive_directory_iterator(path))
@@ -31,9 +31,9 @@ std::vector<std::string> FindFilesOfType(std::string &path, std::string &ext)
 }
 
 int main() {
-    std::string calibrationPath = "./datafiles/";
+    std::string calibrationPath = "../datafiles";
     std::string calibrationExt = ".map";
-    std::string simulationPath = "./datafiles/";
+    std::string simulationPath = "../datafiles";
     std::string simulationExt = ".sim";
     std::vector<std::string> calibrationFiles = FindFilesOfType(calibrationPath, calibrationExt);
     std::vector<std::string> simulationFiles = FindFilesOfType(simulationPath, simulationExt);
@@ -41,17 +41,17 @@ int main() {
     //*****@TODO remove later or turn into creation of calibration and sim objects - currently using for testing FindFileOfType
     for(auto itr : calibrationFiles)
     {
-        std::cout << itr << " ";
+        std::cout << itr << "\n";
     }
 
     for(auto itr : simulationFiles)
     {
-        std::cout << itr << " ";
+        std::cout << itr << "\n";
     }
     //*****@END Removal here
 
     //std::unique_ptr<Calibration> motor(new Calibration(calibrationPath));
-    
+
     //@TODO write simulation class and load simulation data file(s)
     //Start simulation as an object (maybe several simulations on seperate threads)
     //Use rule of 5 to copy calibration data into sim as shared pointer perhaps.

@@ -1,0 +1,3 @@
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles/edit_cache.dir
+/mnt/hgfs/SharedDocs/GitHub/EV-Simulation/build/CMakeFiles/EVSim.dir
