@@ -9,7 +9,7 @@ class Simulation
 {
 public:
 Simulation(std::string);
-~Simulation(); //must return calibrations back to main.cpp unless does this automatically
+~Simulation();
 
 int StartSimulation(std::shared_ptr<Calibration>);
 

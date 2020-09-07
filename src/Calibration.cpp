@@ -13,7 +13,7 @@ Calibration::Calibration(std::string calibrationPath)
 
 Calibration::~Calibration()
 {
-    //Insert decontruction code here
+    //Insert deconstruction code here
 }
 
 int Calibration::GetRpm(int &triggersPerSecond)
@@ -124,7 +124,8 @@ float Calibration::GetAccelRate()
     return _accelRate;
 }
 
-void Calibration::LoadCalibration(){ //Read calibration data from file
+//Reads calibration data from file
+void Calibration::LoadCalibration(){
     std::string line;
     std::string key;
     std::ifstream calibrationFile(_calibrationPath);

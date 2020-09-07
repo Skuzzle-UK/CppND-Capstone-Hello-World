@@ -15,10 +15,11 @@ Simulation::Simulation(std::string simulationPath)
 
 Simulation::~Simulation()
 {
-  //Insert abny deconstruction code here  
+  //Insert any deconstruction code here
 }
 
-void Simulation::LoadSimulation(){ //Read simulation data from file into vectors
+//Reads simulation data from file into vectors
+void Simulation::LoadSimulation(){
     std::string line;
     std::string key;
     std::ifstream simulationFile(_simulationPath);
@@ -58,19 +59,12 @@ void Simulation::LoadSimulation(){ //Read simulation data from file into vectors
 //Returns 0 if vehicle can not complete simulation
 int Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
 {
-    
     int timeToComplete = 0;
-    //@TODO write code that iterates through each item of all data vectors
-    //Drive vehicle through sim based on each item of data vectors
-    //Check vehicle reaches end of course or speed zero so fails
-    //Record time between lines to create total time take for sim
-
     for(int i = 0; i < _triggersPerSecond.size(); i++)
     {
         if(_Speed != -1) //check it hasn't failed test
         {
             int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
-        
             timeToComplete += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
 
             _mutex.lock();

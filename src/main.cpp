@@ -8,18 +8,6 @@
 #include <filesystem>
 #include <future>
 
-
-//Lets make a sim whereby 3 or 4 calibration files are loaded in.
-//These are then each fed through 10 or so simulations.
-//start a thread for each calibration  when it runs through a sim.
-//Program run order:
-//Sim 1 - calib 1 >> calib 2 >> calib 3 (3 threads - wait until they all end)
-//Display to term finish time for each calibration with best highlighted.
-//Sim 2 - calib 1 >> calib 2 >> calib 3 (3 threads - wait until they all end)
-//etc
-//loop
-//Finally pick overall best calibration
-
 //@TODO - Move this function to a seperate file : USEFUL for the future (reusable code is good)
 std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
 {
@@ -63,7 +51,6 @@ int main() {
         sims.emplace_back(sim);
     }
 
-    //@TODO sort out simulation running - currently just loads sims into threads
     for(int i = 0; i < sims.size(); i++)
     {
         std::vector<std::future<int>> simthreads;
@@ -79,6 +66,8 @@ int main() {
         }
         Plus add pop_back to threads after the get (which waits for completion) is called.
         ****/
+
+       //@TODO figure out how to take each bit of thread data and organise so that we have clear winners for each sim and overall.
     }
 
 
