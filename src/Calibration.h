@@ -14,6 +14,8 @@ public:
     //getters
     int GetRpm(int &);
     float GetTps(float &);
+    float GetAccelRate();
+    int GetTorque(int rpm, float tps);
 
 private:
     
@@ -22,6 +24,7 @@ private:
     int _torqueMap[8][8];
     int _maxRpm;
     int _teeth; //number of triggers per revolution of motor
+    float _accelRate; //Rate of vehicle speed increase multiplier per loop
     AnalogSensor _tps;
 };
 

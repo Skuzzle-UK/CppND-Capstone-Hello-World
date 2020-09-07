@@ -1,6 +1,7 @@
 TPS 1.2 4.3
 TEETH 4
 MAXRPM 6000
+ACCEL 0.2 //recommend set all calibrations to the same value for continuity
 0 2 4 10 14 18 24 36 TORQUEMAP //8 lines inc this and 7 following
 4 8 12 22 34 48 52 68
 12 22 32 40 51 62 69 75

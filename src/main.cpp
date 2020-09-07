@@ -66,16 +66,19 @@ int main() {
     //@TODO sort out simulation running - currently just loads sims into threads
     for(int i = 0; i < sims.size(); i++)
     {
-        std::vector<std::future<float>> simthreads;
-        std::vector<float> results;
+        std::vector<std::future<int>> simthreads;
+        std::vector<int> results;
         for(int j = 0; j < motors.size(); j++)
         {
             simthreads.emplace_back(std::async(&Simulation::StartSimulation, sims[i], motors[j]));
         }
-        for(int k = 0; k < motors.size(); k++)
+        //*** @TODO re-establish this section if required later once threads start working
+        /*for(int k = 0; k < motors.size(); k++)
         {
             results.push_back(simthreads[k].get()); //@TODO work out how to actually deal with results
         }
+        Plus add pop_back to threads after the get (which waits for completion) is called.
+        ****/
     }
 
 

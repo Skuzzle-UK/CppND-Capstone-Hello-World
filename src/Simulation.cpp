@@ -3,10 +3,12 @@
 #include <iostream>
 #include <regex>
 #include <chrono>
+#include <thread>
 #include "Simulation.h"
 
 Simulation::Simulation(std::string simulationPath)
 {
+    _Speed = 0.0;
     _simulationPath = simulationPath;
     LoadSimulation();
 }
@@ -52,23 +54,82 @@ void Simulation::LoadSimulation(){ //Read simulation data from file into vectors
     }
 }
 
-float Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
+//Returns "time" taken to traverse simulation course
+//Returns 0 if vehicle can not complete simulation
+int Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
 {
     
-    float timeToComplete = 0.0;
+    int timeToComplete = 0;
     //@TODO write code that iterates through each item of all data vectors
     //Drive vehicle through sim based on each item of data vectors
-    //Check vehicle reaches end of course or rpm zero so fails
+    //Check vehicle reaches end of course or speed zero so fails
     //Record time between lines to create total time take for sim
 
-    for(int i = 0; i < _triggersPerSecond.size(); i++) //read in some detail so far - loads to go, plus actual sim race physics
+    for(int i = 0; i < _triggersPerSecond.size(); i++)
     {
-        int rpm = calibration->GetRpm(_triggersPerSecond[i]);
-        float tps = calibration->GetTps(_tpsVoltage[i]);
-        _mutex.lock();
-        std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " rpm : " << rpm << "\n";
-        std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " tps : " << tps << "\n";
-        _mutex.unlock();
+        if(_Speed != -1) //check it hasn't failed test
+        {
+            int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
+        
+            timeToComplete += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
+
+            _mutex.lock();
+            std::cout << "Interpolated torque value : " << torqueProduced << "\n";
+            std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " rpm : " << calibration->GetRpm(_triggersPerSecond[i]) << " rpm\n";
+            std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " tps : " << calibration->GetTps(_tpsVoltage[i]) << " %\n";
+            _mutex.unlock();
+        }
     }
-    return timeToComplete; //@TODO - work out how to calc timeToComplete
+    if(_Speed != -1)
+    {
+        _mutex.lock();
+        std::cout << "Completed sim in : " << timeToComplete << "\n";
+        _mutex.unlock();
+        return timeToComplete;
+    }
+    else
+    {
+        _mutex.lock();
+        std::cout << "Failed sim!" << "\n";
+        _mutex.unlock();
+        return 0; //failure value
+    }
+    
+}
+
+int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduced, int torqueRequired)
+{
+    int time = 0;
+    float speed = _Speed;
+    float distance = 0.0;
+    while (distance < endDistance)
+    {
+        int effort = torqueProduced - torqueRequired;
+        float accel = effort * (accelRate / 1000);
+        speed += accel;
+        distance += speed;
+        time += 1; //Just a random number for sim time constant
+        //@REMOVE COMMENTS to add realism to simulation add comments to speed up processing
+        std::this_thread::sleep_for(std::chrono::milliseconds(10)); //Change value to change speed of simulation
+        if (speed <= 0)
+        {
+            break;
+        }
+    }
+    if(speed > 0)
+    {
+        _Speed = speed;
+        _mutex.lock();
+        std::cout << "Time taken : " << time << "\n";
+        _mutex.unlock();
+        return time;
+    }
+    else
+    {
+        _Speed = -1; //value for checkfailed;
+        _mutex.lock();
+        std::cout << "FAILED!\n";
+        _mutex.unlock();
+        return 0;
+    } 
 }

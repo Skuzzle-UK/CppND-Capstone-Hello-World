@@ -1,6 +1,7 @@
 TPS 0.9 4.8
 TEETH 8
 MAXRPM 8000
+ACCEL 0.2
 0 8 10 12 14 18 24 36 TORQUEMAP //8 lines inc this and 7 following
 4 8 12 30 34 48 52 68
 12 22 32 40 51 62 69 75
