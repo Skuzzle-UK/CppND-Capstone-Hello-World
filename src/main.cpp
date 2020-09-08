@@ -68,6 +68,8 @@ int main() {
         ****/
 
        //@TODO figure out how to take each bit of thread data and organise so that we have clear winners for each sim and overall.
+       //@EPIC IDEA - Make result a seperate class. Use move symantics to create a result object and move it to a results class vector to create come up with the results.
+       //Call results method from main to drag out results once all threads are complete.
     }
 
 
