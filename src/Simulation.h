@@ -4,6 +4,7 @@
 #include <vector>
 #include <mutex>
 #include "Calibration.h"
+#include "Result.h"
 
 class Simulation
 {
@@ -11,7 +12,7 @@ public:
 Simulation(std::string);
 ~Simulation();
 
-int StartSimulation(std::shared_ptr<Calibration>);
+Result StartSimulation(std::shared_ptr<Calibration>);
 
 private:
 void LoadSimulation();

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include "Simulation.h"
+#include "Result.h"
 
 Simulation::Simulation(std::string simulationPath)
 {
@@ -55,38 +56,33 @@ void Simulation::LoadSimulation(){
     }
 }
 
-//Returns "time" taken to traverse simulation course
-//Returns 0 if vehicle can not complete simulation
-int Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
+Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
 {
-    int timeToComplete = 0;
+    Result thisResult;
+    thisResult.calFile = calibration->GetCalibrationPath();
+    thisResult.simFile = _simulationPath;
     for(int i = 0; i < _triggersPerSecond.size(); i++)
     {
         if(_Speed != -1) //check it hasn't failed test
         {
             int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
-            timeToComplete += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
+            thisResult.time += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
 
             _mutex.lock();
-            std::cout << "Interpolated torque value : " << torqueProduced << "\n";
-            std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " rpm : " << calibration->GetRpm(_triggersPerSecond[i]) << " rpm\n";
-            std::cout << "Simulation " << _simulationPath << " calibration at memory location " << calibration << " " << " tps : " << calibration->GetTps(_tpsVoltage[i]) << " %\n";
+            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " rpm : " << calibration->GetRpm(_triggersPerSecond[i]) << " rpm\n";
+            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " tps : " << calibration->GetTps(_tpsVoltage[i]) << " %\n";
+            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << "Interpolated torque value : " << torqueProduced << "\n";
             _mutex.unlock();
         }
     }
     if(_Speed != -1)
     {
-        _mutex.lock();
-        std::cout << "Completed sim in : " << timeToComplete << "\n";
-        _mutex.unlock();
-        return timeToComplete;
+        return thisResult;
     }
     else
     {
-        _mutex.lock();
-        std::cout << "Failed sim!" << "\n";
-        _mutex.unlock();
-        return 0; //failure value
+        thisResult.time = 0;
+        return thisResult; //failure value
     }
     
 }
@@ -102,9 +98,9 @@ int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduc
         float accel = effort * (accelRate / 1000);
         speed += accel;
         distance += speed;
-        time += 1; //Just a random number for sim time constant
-        //@REMOVE COMMENTS to add realism to simulation add comments to speed up processing
-        std::this_thread::sleep_for(std::chrono::milliseconds(10)); //Change value to change speed of simulation
+        time += 1; //Just a sensibly chosen value for sim time constant
+        //@REMOVE COMMENTS BELOW to add realism to simulation add comments to speed up processing
+        //std::this_thread::sleep_for(std::chrono::milliseconds(1)); //Change value to change speed of simulation
         if (speed <= 0)
         {
             break;
@@ -113,17 +109,11 @@ int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduc
     if(speed > 0)
     {
         _Speed = speed;
-        _mutex.lock();
-        std::cout << "Time taken : " << time << "\n";
-        _mutex.unlock();
         return time;
     }
     else
     {
         _Speed = -1; //value for checkfailed;
-        _mutex.lock();
-        std::cout << "FAILED!\n";
-        _mutex.unlock();
         return 0;
     } 
 }

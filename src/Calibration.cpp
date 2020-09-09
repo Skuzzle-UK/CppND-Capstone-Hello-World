@@ -124,6 +124,11 @@ float Calibration::GetAccelRate()
     return _accelRate;
 }
 
+std::string Calibration::GetCalibrationPath()
+{
+    return _calibrationPath;
+}
+
 //Reads calibration data from file
 void Calibration::LoadCalibration(){
     std::string line;

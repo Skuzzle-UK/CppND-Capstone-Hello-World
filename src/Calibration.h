@@ -16,6 +16,7 @@ public:
     float GetTps(float &);
     float GetAccelRate();
     int GetTorque(int rpm, float tps);
+    std::string GetCalibrationPath();
 
 private:
     

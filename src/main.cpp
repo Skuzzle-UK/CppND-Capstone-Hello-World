@@ -1,5 +1,7 @@
 #include "Calibration.h"
 #include "Simulation.h"
+#include "Result.h"
+#include "SortResults.h"
 #include <iostream>
 #include <string>
 #include <memory>
@@ -7,6 +9,8 @@
 #include <fstream>
 #include <filesystem>
 #include <future>
+#include <algorithm>
+
 
 //@TODO - Move this function to a seperate file : USEFUL for the future (reusable code is good)
 std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
@@ -51,27 +55,24 @@ int main() {
         sims.emplace_back(sim);
     }
 
+    std::vector<Result> bestResults;
     for(int i = 0; i < sims.size(); i++)
     {
-        std::vector<std::future<int>> simthreads;
-        std::vector<int> results;
+        std::vector<std::future<Result>> simThreads;
+        std::vector<Result> simResults;
         for(int j = 0; j < motors.size(); j++)
         {
-            simthreads.emplace_back(std::async(&Simulation::StartSimulation, sims[i], motors[j]));
+            simThreads.emplace_back(std::async(std::launch::async, &Simulation::StartSimulation, sims[i], motors[j]));
         }
-        //*** @TODO re-establish this section if required later once threads start working
-        /*for(int k = 0; k < motors.size(); k++)
+        for(int k = 0; k < motors.size(); k++)
         {
-            results.push_back(simthreads[k].get()); //@TODO work out how to actually deal with results
+            simResults.push_back(simThreads[k].get());
         }
-        Plus add pop_back to threads after the get (which waits for completion) is called.
-        ****/
-
-       //@TODO figure out how to take each bit of thread data and organise so that we have clear winners for each sim and overall.
-       //@EPIC IDEA - Make result a seperate class. Use move symantics to create a result object and move it to a results class vector to create come up with the results.
-       //Call results method from main to drag out results once all threads are complete.
+        bestResults.push_back(BestResult(simResults)); //try to make std::unique_ptr later as it can be destroyed when BestResult() goes out of scope
     }
+        //@TODO count through allResults vector to find the calibration with the most wins.
 
+        //@TODO output to term the results in a visually appealing way.
 
     return 0;
 }
