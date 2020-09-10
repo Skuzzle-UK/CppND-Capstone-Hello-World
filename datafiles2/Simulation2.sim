@@ -1,0 +1,9 @@
+//Simulation file
+//Simulation starts at #START_SIM
+//Simulation progresses line by line until #END_SIM is reached
+//Do not add line spaces between #START_SIM and #END_SIM
+//Format of line is Triggers going high per second, Throttle position voltage for this sector, Distance to travel (might as well be kilometers) and finally rate of torque effort required to maintain speed.
+
+#START_SIM
+#LINE 215 1.1 1.26, 7
+#END_SIM
