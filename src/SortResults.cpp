@@ -33,6 +33,7 @@ Result SingleBestResult(std::vector<Result> simResults)
 std::string Winner(std::vector<Result> &bestList)
 {
     //@TODO - Make this function actually get the best overall result rather than displaying result 1 all the time
+    //@LAST BIT BEFORE SUBMIT
     std::string best = bestList[1].calFile;
     return best;
 }

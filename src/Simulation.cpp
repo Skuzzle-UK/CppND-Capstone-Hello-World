@@ -75,7 +75,7 @@ Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
     {
         thisResult.time = 0;
         _mutex.lock();
-        std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " FAILED! " << thisResult.time << "\n";
+        std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " FAILED! " << "\n";
         _mutex.unlock();
         return thisResult;
     }
