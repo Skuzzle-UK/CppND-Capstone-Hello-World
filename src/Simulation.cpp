@@ -32,7 +32,6 @@ void Simulation::LoadSimulation(){
             std::istringstream linestream(line);
             linestream >> key;
         }
-        std::cout << "Loading simulation" << _simulationPath << " ... \n";
         while (key != "#END_SIM")
         {
             int triggersPerSecond, torqueRequired;
@@ -67,24 +66,24 @@ Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
         {
             int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
             thisResult.time += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
-
-            _mutex.lock();
-            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " rpm : " << calibration->GetRpm(_triggersPerSecond[i]) << " rpm\n";
-            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " tps : " << calibration->GetTps(_tpsVoltage[i]) << " %\n";
-            std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << "Interpolated torque value : " << torqueProduced << "\n";
-            _mutex.unlock();
         }
     }
+
     if(_Speed != -1)
     {
+    _mutex.lock();
+        std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " took : " << thisResult.time << "\n";
+    _mutex.unlock();
         return thisResult;
     }
     else
     {
         thisResult.time = 0;
+    _mutex.lock();
+        std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " FAILED! " << thisResult.time << "\n";
+    _mutex.unlock();
         return thisResult; //failure value
     }
-    
 }
 
 int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduced, int torqueRequired)
@@ -99,8 +98,7 @@ int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduc
         speed += accel;
         distance += speed;
         time += 1; //Just a sensibly chosen value for sim time constant
-        //@REMOVE COMMENTS BELOW to add realism to simulation add comments to speed up processing
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1)); //Change value to change speed of simulation
+        std::this_thread::sleep_for(std::chrono::milliseconds(2)); //Change value to change speed of simulation
         if (speed <= 0)
         {
             break;

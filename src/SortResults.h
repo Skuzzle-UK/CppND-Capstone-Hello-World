@@ -4,6 +4,12 @@
 #include <vector>
 #include "Result.h"
 
-Result BestResult(std::vector<Result> &simResults);
+bool sortResults(Result a, Result b);
+
+Result SingleBestResult(std::vector<Result> &simResults);
+
+std::string Winner(std::vector<Result> &bestList);
+
+
 
 #endif /* SORTRESULT_H_ */

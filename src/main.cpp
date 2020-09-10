@@ -55,6 +55,8 @@ int main() {
         sims.emplace_back(sim);
     }
 
+    std::cout << "\n" << "Starting Simulations:" << "\n";
+
     std::vector<Result> bestResults;
     for(int i = 0; i < sims.size(); i++)
     {
@@ -68,11 +70,22 @@ int main() {
         {
             simResults.push_back(simThreads[k].get());
         }
-        bestResults.push_back(BestResult(simResults)); //try to make std::unique_ptr later as it can be destroyed when BestResult() goes out of scope
+        bestResults.push_back(SingleBestResult(simResults)); //try to make std::unique_ptr later as it can be destroyed when BestResult() goes out of scope
     }
-        //@TODO count through allResults vector to find the calibration with the most wins.
+    
+    std::cout << "\n" << "Winners:" << "\n";
+    std::cout << "--------" << "\n";
+    std::cout << "Simulation <--------------------> Calibration" << "\n";
+    for (int i = 0; i < bestResults.size(); i++)
+    {
+        std::cout << bestResults[i].simFile << " : " << bestResults[i].calFile << "\n";
+    }
 
-        //@TODO output to term the results in a visually appealing way.
+    //@TODO count through BestResults vector to find the calibration with the most wins.
+    std::string theWinner = Winner(bestResults);
+
+    std::cout << "\n" << "The calibration which performs the best in the majority of simulations is...    " << theWinner << "\n";
+    std::cout << theWinner << "\n";
 
     return 0;
 }
