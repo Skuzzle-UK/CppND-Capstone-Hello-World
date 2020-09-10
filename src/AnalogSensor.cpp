@@ -1,11 +1,11 @@
 #include "AnalogSensor.h"
 #include <regex>
 
-AnalogSensor::AnalogSensor()
+AnalogSensor::AnalogSensor() : _min{0}, _max{5}
 {
-    AnalogSensor::Update(0.0, 5.0);
 }
 
+//Returns a percentage value between min and max voltage
 float AnalogSensor::Value(float voltage)
 {
     float value = 0;
@@ -21,8 +21,9 @@ float AnalogSensor::Value(float voltage)
     return value;
 }
 
+//Sanity check that min and max are is sensible
 bool AnalogSensor::Sanity(float min, float max){
-    if (min < max)
+    if (min < max && min >= 0 && max <= 5)
     {
         return true;
     }
@@ -32,6 +33,7 @@ bool AnalogSensor::Sanity(float min, float max){
     }
 }
 
+//Method to fill _min and _max values
 void AnalogSensor::Update(float min, float max)
 {
     if (Sanity(min, max))

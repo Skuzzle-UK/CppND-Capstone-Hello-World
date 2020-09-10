@@ -5,14 +5,14 @@
 //Format of line is Triggers going high per second, Throttle position voltage for this sector, Distance to travel (might as well be kilometers) and finally rate of torque effort required to maintain speed.
 
 #START_SIM
-#LINE 120 4.4 17.46 42
-#LINE 193 2.4 7.31 12
-#LINE 171 3 8.12 58
-#LINE 99 3.3 18.75 60
-#LINE 150 2 107.2 22
-#LINE 205 3.9 44.63 67
-#LINE 405 3.3 88.43 8
-#LINE 322 2.9 1.75 65
-#LINE 457 2.2 10.12 2
-#LINE 33 1.9 14.63 7
+#LINE 120 2 47.4 3
+#LINE 193 2.4 71 4
+#LINE 171 1 812.1 2
+#LINE 99 1.2 18 3
+#LINE 150 2.1 17.2 1
+#LINE 205 1 46.3 2
+#LINE 405 1.2 8.43 2
+#LINE 322 2 1.5 3
+#LINE 457 1.1 1.12 2
+#LINE 33 1.4 4.63 1
 #END_SIM

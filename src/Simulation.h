@@ -10,7 +10,6 @@ class Simulation
 {
 public:
 Simulation(std::string);
-~Simulation();
 
 Result StartSimulation(std::shared_ptr<Calibration>);
 

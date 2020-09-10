@@ -1,21 +1,18 @@
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <regex>
 #include <string>
 #include <math.h>
 #include "Calibration.h"
 
-Calibration::Calibration(std::string calibrationPath)
+Calibration::Calibration(std::string calibrationPath) : _calibrationPath{calibrationPath}
 {
-    _calibrationPath = calibrationPath;
-    LoadCalibration();
+    LoadCalibration(); //Load calibration data file on construction
 }
 
-Calibration::~Calibration()
-{
-    //Insert deconstruction code here
-}
 
+//Getters
 int Calibration::GetRpm(int &triggersPerSecond)
 {
     int currentRpm = 0;
@@ -23,14 +20,14 @@ int Calibration::GetRpm(int &triggersPerSecond)
     return currentRpm;
 }
 
-float Calibration::GetTps(float &voltage)
+float Calibration::GetTps(float &voltage) //throttle position
 {
     float tps = _tps.Value(voltage);
     return tps;
 }
 
 
-//Takes RPM value and TPS value to return the correct interpolated torque value from _torqueMap
+//Interpolates a torque value from _torqueMapTakes using RPM value and TPS value 
 int Calibration::GetTorque(int rpm, float tps)
 {
     float xAxis_rpm_[8] {0, 1000, 2000, 3000, 4000, 5000, 6500, 8000}; //Predefined rpm point (maybe move into calibration.map at later point)
@@ -171,7 +168,7 @@ void Calibration::LoadCalibration(){
                 _torqueMap[x][y] = v[x];
             }
         }
-
+        std::cout << "Calibration " << _calibrationPath << " loaded!" << "\n";
         calibrationFile.close();
     }
     else {

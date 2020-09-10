@@ -7,16 +7,9 @@
 #include "Simulation.h"
 #include "Result.h"
 
-Simulation::Simulation(std::string simulationPath)
+Simulation::Simulation(std::string simulationPath) : _Speed{0.0}, _simulationPath{simulationPath}
 {
-    _Speed = 0.0;
-    _simulationPath = simulationPath;
-    LoadSimulation();
-}
-
-Simulation::~Simulation()
-{
-  //Insert any deconstruction code here
+    LoadSimulation(); //Loads the simulation data file on construction
 }
 
 //Reads simulation data from file into vectors
@@ -55,6 +48,8 @@ void Simulation::LoadSimulation(){
     }
 }
 
+
+//Method that runs the simulation
 Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
 {
     Result thisResult;
@@ -62,32 +57,35 @@ Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
     thisResult.simFile = _simulationPath;
     for(int i = 0; i < _triggersPerSecond.size(); i++)
     {
-        if(_Speed != -1) //check it hasn't failed test
+        if(_Speed != -1) //check calibration hasn't already failed test
         {
             int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
             thisResult.time += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
         }
     }
 
-    if(_Speed != -1)
+    if(_Speed != -1) //Calibration passed test
     {
-    _mutex.lock();
+        _mutex.lock();
         std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " took : " << thisResult.time << "\n";
-    _mutex.unlock();
+        _mutex.unlock();
         return thisResult;
     }
-    else
+    else //Calibration failed test
     {
         thisResult.time = 0;
-    _mutex.lock();
+        _mutex.lock();
         std::cout << "Simulation " << thisResult.simFile << " calibration " << thisResult.calFile << " " << " FAILED! " << thisResult.time << "\n";
-    _mutex.unlock();
-        return thisResult; //failure value
+        _mutex.unlock();
+        return thisResult;
     }
 }
 
+
+//Method tests that the vehicle can complete the sector and returns the time taken (time as arbitrary value from simTime constant).
 int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduced, int torqueRequired)
 {
+    const int simTime = 1; //Just a sensibly chosen value for sim time constant - could represent 1 second, 1 minute etc
     int time = 0;
     float speed = _Speed;
     float distance = 0.0;
@@ -97,13 +95,15 @@ int Simulation::DriveSector(float endDistance, float accelRate, int torqueProduc
         float accel = effort * (accelRate / 1000);
         speed += accel;
         distance += speed;
-        time += 1; //Just a sensibly chosen value for sim time constant
+        time += simTime;
         std::this_thread::sleep_for(std::chrono::milliseconds(2)); //Change value to change speed of simulation
         if (speed <= 0)
         {
             break;
         }
     }
+
+    //Check if sector failed because vehicle speed reduced to a complete stop or started rolling backwards (negative values)
     if(speed > 0)
     {
         _Speed = speed;

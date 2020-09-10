@@ -9,7 +9,7 @@ In this project, you can build your own C++ application starting with this repo,
 I decided this project should be to create something that I am working with on a daily basis, yet to expand on what I do daily.
 For this to be the case I have listed a few key focus points:
 * Automotive based
-* Cutting edge modern and future tech
+* Cutting edge modern and future technology
 * Vehicle modification
 * ECU calibration
 * Tuning
@@ -23,20 +23,17 @@ It then drives this electric motor through a simple simulated course and reports
 It does this not once, but with several different motor calibrations all being driven through several different simulated scenarios to find the best motor calibration overall under several usage conditions.
 
 ## Assumptions
-* EV motor can run at varying rpms.
-* Drive ratio of 1km every 1000rpm of motor.
-* If max rpm is reached vehicle will no longer speed up.
-* If zero rpm is reached during testing then test fails.
+* EV motor run at constant rpms for each sector.
+* If zero speed is reached during testing then test fails.
 * If test end is reached then test considered a success.
 * Torque effort required to maintain constant velocity simulated various inclines that vehicle may climb.
 * Torque output beyond required effort creates acceleration and below required effort deceleration.
-* Speed of zero kph confirmed by zero rpm results in test failure
 
 ## Order of execution
 1. Vector of motors is created and loaded with calibration files of type .map found within folder ./datafiles.
 2. Vector of simulations is created and loaded with simulation files of type .sim found within folder ./datafiles.
-3. Simulation 1 shared_ptr. Simulation 1 method started as thread for each motor calibration (motor passed in as unique_ptr).
-4. Wait for simulation 1 to end then write results to terminal for each calibration on 1 line (putting a * infront of the best result).
+3. Simulation 1 shared_ptr. Simulation 1 method started as thread for each motor calibration
+4. Wait for simulation 1 to end then write results to terminal for each calibration.
 5. Best calibration for this sim stored in vector.
 6. Next simulation starts (loop through all sims displaying result on terminal and storing best in vector).
 7. Count number of wins by each calibration.
@@ -54,21 +51,51 @@ It does this not once, but with several different motor calibrations all being d
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
 
-## Basic Build Instructions
+## Basic Build / Run Instructions
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./EVSim`
 
 ## Source Files - Found within src folder
-* main.cpp - `main method. Loads calibrations and simulations. Organises results to display them to terminal`
+* main.cpp - `main method. Loads calibrations and simulations. Launches simulation. Organises results to display them to terminal`
 * AnalogSensor.cpp - `Creates analog sensor object. Can be a voltage between specified min and max. Specifically used for throttle position in this sim`
-* DigitalSensor.cpp - `Creates digital sensor object. Can be set to HIGH or LOW. Using for crank position sensor`
-* Calibration.cpp - `To build a sim motor. Calibration relies on the sensor.cpp's to create an object that resembles an electric vehicle motor with tps, ckp and "3D" torque map`
-* Simulation.cpp - `Creates a simulation environment. Loads sim data and contains methods to run simulation. Returns time vehicle would have taken to complete course`
+* Calibration.cpp - `To build a sim motor. This file creates the class Calibration. Calibration relies on the AnalogSensor.cpp and datafile .map to create an object that resembles an electric vehicle motor with tps and "3D" torque map`
+* Simulation.cpp - `Creates a simulation environment of class Simulation. Loads sim data and contains methods to run simulation. Returns time vehicle would have taken to complete course`
+* SortResults.cpp - `Contains functions specific to sorting the results and to return the best results`
+* Result.h - `Creates a struct Result. This is used to hold the results in varying ways throughout the program, including std::vector<Result> etc`
 
 ## Data Files - Found within datafiles folder
 * Pay attention to how the data files are created as they are read line by line. The `Key` of each line can be named anything, but suggest name remains the same for continuity and easy visual representation of data that follows.
 * Data in files is blank space seperated. For example TPS 0.4 4.7 is ready by the code as variables KEY >> Min >> Max.
 * If in doubt don't modify these data files as no checking is done for correct data on each line.
 * Don't introduce extra lines including blank space lines into these files.
+
+## Rubric Points Used
+* Loops, Functions, I/O   `For loops and while loops through plus the project is well organised into functions and methods`
+
+* Reads data from a file  `main.cpp L19-30 contains a function to return the path to specified files.`
+                          `Calibration.cpp reads data from file L131-178`
+                          `Simulation.cpp reads data from file L18-51`
+
+* Accept user input       `Main.cpp L47 - 74 - Asks user to input file paths and extensions`
+
+* Uses OOP techniques     `Examples throughout`
+
+* Classes use appropriate access specifiers `Calibration.h, Simulation.h and AnalogSensor.h - examples throughout`
+
+* Initialization lists    `Classes Calibration, Simulation and AnalogSensor use initialization lists`
+
+* Abstract implementation details from interfaces `Examples throughout`
+
+* Encapsulate behaviour   `Easily seen in examples of Simulation.cpp and Calibration.cpp. SortResults.cpp although not a class, encapsulates all sorting functions into one file`
+
+* Pass by reference       `Several places but one example is Calibration.cpp L16 & L23`
+
+* Smart Pointers          `Main.cpp L83, 84, 90, 96 - Examples through Simulation.cpp also`
+
+* Multithreading          `std::async used in main.cpp L111`
+
+* Promise / Future        `main.cpp L107 vector of futures - results using .get() on L115`
+
+* Mutex                   `Mutex used in Simulation.cpp L69, 71, 77, 79 and other locations to lock give sole access to terminal output so as not to get muddled output from multiple threads`

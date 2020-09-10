@@ -3,6 +3,7 @@
 #include "Result.h"
 #include "SortResults.h"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <memory>
 #include <vector>
@@ -12,7 +13,9 @@
 #include <algorithm>
 
 
-//@TODO - Move this function to a seperate file : USEFUL for the future (reusable code is good)
+//@TODO - Move this function to a seperate file later : USEFUL for the future (reusable code is good!)
+//No intention to move before submission as documentation would need editing, but well worth keeping for the future
+//Finds all files of a specified extension type within the specified path
 std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
 {
     std::vector<std::string> files;
@@ -26,14 +29,53 @@ std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
     return files;
 }
 
-int main() {
-    //set data file paths and extentions
-    std::string calibrationPath = "../datafiles";
-    std::string calibrationExt = ".map";
-    std::string simulationPath = "../datafiles";
-    std::string simulationExt = ".sim";
 
-    //Get files of all correct types
+
+//Program begins here
+int main() {
+    //Default data file paths and extentions
+    const std::string defaultCalibrationPath = "../datafiles";
+    const std::string defaultCalibrationExt = ".map";
+    const std::string defaultSimulationPath = "../datafiles";
+    const std::string defaultSimulationExt = ".sim";
+
+    std::string calibrationPath;
+    std::string calibrationExt;
+    std::string simulationPath;
+    std::string simulationExt;
+
+    //Get user input of file locations and types (of default if left blank)
+    std::cout << "Enter path to calibration files (leave blank for default: ../datafiles) : ";
+    std::getline(std::cin, calibrationPath);
+    if (calibrationPath == "")
+    {
+        calibrationPath = defaultCalibrationPath;
+    }
+
+    std::cout << "Enter calibration files extension (leave blank for default: .map) : ";
+    std::getline(std::cin, calibrationExt);
+    if (calibrationExt == "")
+    {
+        calibrationExt = defaultCalibrationExt;
+    }
+
+    std::cout << "Enter path to simulation files (leave blank for default: ../datafiles) : ";
+    std::getline(std::cin, simulationPath);
+    if (simulationPath == "")
+    {
+        simulationPath = defaultSimulationPath;
+    }
+
+    std::cout << "Enter simulation files extension (leave blank for default: .sim) : ";
+    std::getline(std::cin, simulationExt);
+    if (simulationExt == "")
+    {
+        simulationExt = defaultSimulationExt;
+    }
+
+
+
+    //Get all files of correct types
     std::vector<std::string> calibrationFiles = FindFilesOfType(calibrationPath, calibrationExt);
     std::vector<std::string> simulationFiles = FindFilesOfType(simulationPath, simulationExt);
 
@@ -57,7 +99,9 @@ int main() {
 
     std::cout << "\n" << "Starting Simulations:" << "\n";
 
-    std::vector<Result> bestResults;
+    std::vector<Result> bestResults; //A place to store the fastest calibration through each simulation
+    
+    //The calibrations for each simulation start up in seperate threads to speed up data processing and to simulate an asyncronous race.
     for(int i = 0; i < sims.size(); i++)
     {
         std::vector<std::future<Result>> simThreads;
@@ -70,7 +114,8 @@ int main() {
         {
             simResults.push_back(simThreads[k].get());
         }
-        bestResults.push_back(SingleBestResult(simResults)); //try to make std::unique_ptr later as it can be destroyed when BestResult() goes out of scope
+
+        bestResults.push_back(SingleBestResult(simResults));
     }
     
     std::cout << "\n" << "Winners:" << "\n";
@@ -81,7 +126,6 @@ int main() {
         std::cout << bestResults[i].simFile << " : " << bestResults[i].calFile << "\n";
     }
 
-    //@TODO count through BestResults vector to find the calibration with the most wins.
     std::string theWinner = Winner(bestResults);
 
     std::cout << "\n" << "The calibration which performs the best in the majority of simulations is...    " << theWinner << "\n";

@@ -5,17 +5,15 @@
 #include <string>
 #include <iostream>
 
+//Used for sort algorithm
 bool sortResults(Result a, Result b)
 {
     return (a.time < b.time);
 }
 
-Result SingleBestResult(std::vector<Result> &simResults)
+//Sorts the sim results into order of completion time and then extracts the results for each sim of which calibration crossed the finish first
+Result SingleBestResult(std::vector<Result> simResults)
 {
-    Result best;
-
-    //@TODO write function to find best result by simResult.time - Drop times of 0
-    //Just return best result from vector.
     std::sort (simResults.begin(), simResults.end(), sortResults);
     int i = 0;
     while (simResults[i].time <= 0 && i < simResults.size() - 1)
@@ -26,7 +24,7 @@ Result SingleBestResult(std::vector<Result> &simResults)
     {
         simResults[i].calFile = "../none - ALL FAILED";
     }
-    best = simResults[i];
+    Result best = simResults[i];
     return best;
 }
 
@@ -34,6 +32,7 @@ Result SingleBestResult(std::vector<Result> &simResults)
 //Organises the best results
 std::string Winner(std::vector<Result> &bestList)
 {
+    //@TODO - Make this function actually get the best overall result rather than displaying result 1 all the time
     std::string best = bestList[1].calFile;
     return best;
 }
