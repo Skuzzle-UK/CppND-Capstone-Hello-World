@@ -56,6 +56,7 @@ It does this not once, but with several different motor calibrations all being d
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./EVSim`
+5. Either input file locations and extensions or allow defaults - extra datafiles2 folder to test user input
 
 ## Source Files - Found within src folder
 * main.cpp - `main method. Loads calibrations and simulations. Launches simulation. Organises results to display them to terminal`
