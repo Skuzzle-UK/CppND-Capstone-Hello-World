@@ -127,9 +127,7 @@ int main() {
     }
 
     std::string theWinner = Winner(bestResults);
-
     std::cout << "\n" << "The calibration which performs the best in the majority of simulations is...    " << theWinner << "\n";
-    std::cout << theWinner << "\n";
 
     return 0;
 }

@@ -29,11 +29,35 @@ Result SingleBestResult(std::vector<Result> simResults)
 }
 
 
-//Organises the best results
+//Organises the best results to find the winning calibration
 std::string Winner(std::vector<Result> &bestList)
 {
-    //@TODO - Make this function actually get the best overall result rather than displaying result 1 all the time
-    //@LAST BIT BEFORE SUBMIT
-    std::string best = bestList[1].calFile;
+    //Puts calibration files into unordered_map to count up the number of each calibration in the bestList
+    std::unordered_map<std::string, int> winner;
+    for (int i = 0; i < bestList.size(); i++)
+    {
+        if (winner.find(bestList[i].calFile) == winner.end())
+        {
+            winner[bestList[i].calFile] = 1;
+        }
+        else
+        {
+            winner[bestList[i].calFile]++;
+        }
+        
+    }
+
+    //Look through unordered_map to find key item which holds the largest value (the winner)
+    std::string best;
+    int bestMapSoFarCount = 0; //just keeps count
+    for (auto x : winner)
+    {
+        if (x.second > bestMapSoFarCount)
+        {
+            best = x.first;
+            bestMapSoFarCount++;
+        }
+    }
+
     return best;
 }

@@ -6,7 +6,7 @@ The Capstone Project gives you a chance to integrate what you've learned through
 In this project, you can build your own C++ application starting with this repo, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
 
 ## My take on the Captone Project
-I decided this project should be to create something that I am working with on a daily basis, yet to expand on what I do daily.
+I decided this project should be to create something that expands on what I do daily.
 For this to be the case I have listed a few key focus points:
 * Automotive based
 * Cutting edge modern and future technology
@@ -15,19 +15,19 @@ For this to be the case I have listed a few key focus points:
 * Tuning
 
 ## Description of EV Simulation
-EV Simulation is a combination of my daily work, mixed with the future of my industry. As an automotive diagnostic director and well established vehicle tuner I have taken note that the automotive industry is moving away from internal combustion and towards electified vehicles and hybrids.
-Being a field in which I have a huge amount of profound knowledge it seemed like a good choice for the Capstone Project.
+EV Simulation is a combination of my daily work, mixed with the future of my industry. As an automotive diagnostic director and well established vehicle tuner I have taken note that the automotive industry is moving away from internal combustion and towards electrified vehicles and hybrids.
+Being a field in which I have a profound knowledge it seemed like a good choice for the Capstone Project.
 This project creates a massively simplified electric vehicle motor through the creation of an object of type Calibration (calibration meaning specification of motor operating parameters and sensor calibration).
 It then drives this electric motor through a simple simulated course and reports the time from start to finish.
 
 It does this not once, but with several different motor calibrations all being driven through several different simulated scenarios to find the best motor calibration overall under several usage conditions.
 
 ## Assumptions
-* EV motor run at constant rpms for each sector.
+* EV motor runs at constant rpms for each sector.
 * If zero speed is reached during testing then test fails.
-* If test end is reached then test considered a success.
-* Torque effort required to maintain constant velocity simulated various inclines that vehicle may climb.
-* Torque output beyond required effort creates acceleration and below required effort deceleration.
+* If test end is reached then the test is considered a success.
+* Torque effort required to maintain constant velocity simulates various inclines that vehicle may climb.
+* Torque output beyond required effort creates acceleration and below required effort creates deceleration.
 
 ## Order of execution
 1. Vector of motors is created and loaded with calibration files of type .map found within folder ./datafiles.
@@ -67,13 +67,13 @@ It does this not once, but with several different motor calibrations all being d
 * Result.h - `Creates a struct Result. This is used to hold the results in varying ways throughout the program, including std::vector<Result> etc`
 
 ## Data Files - Found within datafiles folder
-* Pay attention to how the data files are created as they are read line by line. The `Key` of each line can be named anything, but suggest name remains the same for continuity and easy visual representation of data that follows.
+* Pay attention to how the data files are created as they are read line by line. The `Key` of each line can be named anything, but I suggest the name remains the same for continuity and easy visual representation of data that follows.
 * Data in files is blank space seperated. For example TPS 0.4 4.7 is ready by the code as variables KEY >> Min >> Max.
 * If in doubt don't modify these data files as no checking is done for correct data on each line.
 * Don't introduce extra lines including blank space lines into these files.
 
 ## Rubric Points Used
-* Loops, Functions, I/O   `For loops and while loops through plus the project is well organised into functions and methods`
+* Loops, Functions, I/O   `For loops and while loops throughout, plus the project is well organised into functions and methods`
 
 * Reads data from a file  `main.cpp L19-30 contains a function to return the path to specified files.`
                           `Calibration.cpp reads data from file L131-178`
@@ -99,4 +99,4 @@ It does this not once, but with several different motor calibrations all being d
 
 * Promise / Future        `main.cpp L107 vector of futures - results using .get() on L115`
 
-* Mutex                   `Mutex used in Simulation.cpp L69, 71, 77, 79 and other locations to lock give sole access to terminal output so as not to get muddled output from multiple threads`
+* Mutex                   `Mutex used in Simulation.cpp L69, 71, 77, 79 and other locations to give sole access to terminal output so as not to get muddled output from multiple threads`
