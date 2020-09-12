@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <unordered_map>
 
 //Used for sort algorithm
 bool sortResults(Result a, Result b)
