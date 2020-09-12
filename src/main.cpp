@@ -8,10 +8,12 @@
 #include <memory>
 #include <vector>
 #include <fstream>
-#include <filesystem>
+//#include <filesystem> On my own system this worked - Udacity environment it didnt
+#include <experimental/filesystem>
 #include <future>
 #include <algorithm>
 
+const std::string clearTerm = "\x1B[2J\x1B[H"; //used to clear the console/terminal for visual asthetics
 
 //@TODO - Move this function to a seperate file later : USEFUL for the future (reusable code is good!)
 //No intention to move before submission as documentation would need editing, but well worth keeping for the future
@@ -19,7 +21,7 @@
 std::vector<std::string> FindFilesOfType(std::string path, std::string ext)
 {
     std::vector<std::string> files;
-    for (auto &p : std::filesystem::recursive_directory_iterator(path))
+    for (auto &p : std::experimental::filesystem::recursive_directory_iterator(path))
     {
         if (p.path().extension() == ext)
         {
@@ -45,35 +47,35 @@ int main() {
     std::string simulationExt;
 
     //Get user input of file locations and types (of default if left blank)
-    std::cout << "Enter path to calibration files (leave blank for default: ../datafiles) : ";
+    std::cout << clearTerm << "Enter path to calibration files (leave blank for default: ../datafiles) : ";
     std::getline(std::cin, calibrationPath);
     if (calibrationPath == "")
     {
         calibrationPath = defaultCalibrationPath;
     }
 
-    std::cout << "Enter calibration files extension (leave blank for default: .map) : ";
+    std::cout << clearTerm << "Enter calibration files extension (leave blank for default: .map) : ";
     std::getline(std::cin, calibrationExt);
     if (calibrationExt == "")
     {
         calibrationExt = defaultCalibrationExt;
     }
 
-    std::cout << "Enter path to simulation files (leave blank for default: ../datafiles) : ";
+    std::cout << clearTerm << "Enter path to simulation files (leave blank for default: ../datafiles) : ";
     std::getline(std::cin, simulationPath);
     if (simulationPath == "")
     {
         simulationPath = defaultSimulationPath;
     }
 
-    std::cout << "Enter simulation files extension (leave blank for default: .sim) : ";
+    std::cout << clearTerm << "Enter simulation files extension (leave blank for default: .sim) : ";
     std::getline(std::cin, simulationExt);
     if (simulationExt == "")
     {
         simulationExt = defaultSimulationExt;
     }
 
-
+    std::cout << clearTerm;
 
     //Get all files of correct types
     std::vector<std::string> calibrationFiles = FindFilesOfType(calibrationPath, calibrationExt);
@@ -127,7 +129,9 @@ int main() {
     }
 
     std::string theWinner = Winner(bestResults);
+
     std::cout << "\n" << "The calibration which performs the best in the majority of simulations is...    " << theWinner << "\n";
+    std::cout << theWinner << "\n";
 
     return 0;
 }

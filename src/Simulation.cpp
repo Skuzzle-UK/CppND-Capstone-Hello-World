@@ -55,12 +55,13 @@ Result Simulation::StartSimulation(std::shared_ptr<Calibration> calibration)
     Result thisResult;
     thisResult.calFile = calibration->GetCalibrationPath();
     thisResult.simFile = _simulationPath;
+
     for(int i = 0; i < _triggersPerSecond.size(); i++)
     {
         if(_Speed != -1) //check calibration hasn't already failed test
-        {
-            int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
-            thisResult.time += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
+        {  
+          	int torqueProduced = calibration->GetTorque(calibration->GetRpm(_triggersPerSecond[i]), calibration->GetTps(_tpsVoltage[i]));
+          	thisResult.time += DriveSector(_distance[i], calibration->GetAccelRate(), torqueProduced, _torqueRequired[i]);
         }
     }
 

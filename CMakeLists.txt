@@ -9,7 +9,4 @@ project(EVSim)
 # Find all executables
 file(GLOB project_SRCS "src/*.cpp")
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
-
 add_executable(EVSim ${project_SRCS})

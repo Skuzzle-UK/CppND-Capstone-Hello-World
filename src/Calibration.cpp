@@ -33,7 +33,6 @@ int Calibration::GetTorque(int rpm, float tps)
     float xAxis_rpm_[8] {0, 1000, 2000, 3000, 4000, 5000, 6500, 8000}; //Predefined rpm point (maybe move into calibration.map at later point)
     float yAxis_tps_[8] {0, 10, 20, 35, 50, 75, 80, 100}; //TPS points see above comment
     float value = 0;
-
     //finds xAxis_rpm_ floating point position
     int x = 0;
     while(xAxis_rpm_[x] < rpm){
@@ -128,42 +127,43 @@ std::string Calibration::GetCalibrationPath()
 
 //Reads calibration data from file
 void Calibration::LoadCalibration(){
+
     std::string line;
     std::string key;
     std::ifstream calibrationFile(_calibrationPath);
     
     if (calibrationFile.is_open()) {
-        
+      //@TODO it falls over on this section - IF is open works.. but linestream not read
         //Load TPS
         float f1, f2;
         std::getline(calibrationFile, line);
-        std::istringstream linestream(line);
+      	std::istringstream linestream(line);
         linestream >> key >> f1 >> f2;
         _tps.Update(f1, f2);
-
+      
         //Load number of trigger teeth per revolution
         int i1;
         std::getline(calibrationFile, line);
-        linestream.str(line);
-        linestream >> key >> i1;
+      	std::istringstream linestream2(line);   //Originally linestream.str(line) which worked on my home build but not here ?
+        linestream2 >> key >> i1;
         _teeth = i1;
 
         std::getline(calibrationFile, line);
-        linestream.str(line);
-        linestream >> key >> i1;
+      	std::istringstream linestream3(line);
+        linestream3 >> key >> i1;
         _maxRpm = i1;
-
+      
         std::getline(calibrationFile, line);
-        linestream.str(line);
-        linestream >> key >> f1;
+        std::istringstream linestream4(line);
+        linestream4 >> key >> f1;
         _accelRate = f1;
 
         //Load torque map
         int v[8];
         for (int y = 0; y < 8; y++){
             std::getline(calibrationFile, line);
-            linestream.str(line);
-            linestream >> v[0] >> v[1] >> v[2] >> v[3] >> v[4] >> v[5] >> v[6] >> v[7];
+      		std::istringstream linestream5(line);
+            linestream5 >> v[0] >> v[1] >> v[2] >> v[3] >> v[4] >> v[5] >> v[6] >> v[7];
             for (int x = 0; x < 8; x++){
                 _torqueMap[x][y] = v[x];
             }
